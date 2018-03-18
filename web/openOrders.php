@@ -1,36 +1,14 @@
 <?php
-	require_once("action/OrderHistoryAction.php");
+	require_once("action/OpenOrdersAction.php");
 
-	$action = new OrderHistoryAction();
+	$action = new OpenOrdersAction();
 	$action->execute();
 
 	require_once("partial/header.php");
 ?>
 		<div class="container">
 			<div>
-				<h1 >Order History</h1>
-			</div>
-
-			<div >
-			<!-- search bar -->
-				<form>		
-					<div class=" floatleft">				
-						<span>Date :</span>
-						<input type="text">
-						<span>Pair :</span>
-						<input type="text">
-						<span>Type :</span>
-						<input type="select">
-						<a href="#" class="btn btn-blue">search</a>	
-					</div>
-					<div class="floatleft">
-						<input type="checkbox" id="">
-						<label for="" >
-							Hide all cancelled
-						</label>
-						<a href="#" >Export Complete Order History</a>
-					</div>
-				</form>
+				<h1 >Open Orders</h1>
 			</div>
 			
 			<div class=>
@@ -59,8 +37,8 @@
 							<th class="alignright ">	
 								Total								
 							</th>
-							<th class="alignright ">			
-								Status						
+							<th class="alignright ">
+								Action									
 							</th>		
 						</tr>
 						<!-- COIN ROW -->
@@ -87,7 +65,7 @@
 								Test								
 							</td>
 							<td class="alignright ">
-								test	
+								<a href="#" class="btn ">Cancel</a>	
 							</td>								
 						</tr>
 					</tbody>
