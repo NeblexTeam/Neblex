@@ -5,7 +5,7 @@
 	class BalanceAction extends CommonAction {
 
 		public function __construct() {
-			parent::__construct(parent::$VISIBILITY_PUBLIC, "Balance Neblex", true);
+			parent::__construct(parent::$VISIBILITY_MEMBER, "Balance Neblex", true);
 		}
 
 		protected function executeAction() {

@@ -5,7 +5,7 @@
 	class OrderHistoryAction extends CommonAction {
 
 		public function __construct() {
-			parent::__construct(parent::$VISIBILITY_PUBLIC, "Order History Neblex" , true);
+			parent::__construct(parent::$VISIBILITY_MEMBER, "Order History Neblex" , true);
 		}
 
 		protected function executeAction() {

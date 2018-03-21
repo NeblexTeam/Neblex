@@ -3,12 +3,15 @@
 
 	$action = new ResetAction();
 	$action->execute();
+	$passwordReseted = $action->passwordReseted;
+	$passwordResetFail = $action->passwordResetFail;
+	$passwordConfirmation = $action->passwordConfirmation;
 
 	require_once("partial/header.php");
 ?>
 		<div>
 			<div class="f-prz formBlock">
-				<form class="loginForm  " id="forgotPwd-form" novalidate="novalidate">
+				<form class="loginForm" method="post">
 					<a href="Index"><img src="./images/logo.png"  height="60" alt="NEBLEX"></a>
 					<h3 class="loginFormTitle"><span >Reset Password</span></h3>
 					
@@ -16,21 +19,46 @@
 						<p >Make sure you are browsing <strong>https://www.neblex.io</strong></p>
 					</div>
 					
-					<p class="ErrorForm f-nomargin"></p>
+					<div class="ErrorForm" ></div>
+
+					<div>
+						<?php 
+								if ($passwordResetFail == true) {
+									?>
+									<div class="magenta">If you're trying to reset your password, please click on the link we've sent in your email</div>
+									<?php
+								}
+							?>
+					</div>
+					<div>
+						<?php 
+								if ($passwordConfirmation == false) {
+									?>
+									<div class="magenta">Password and Confirmation don't match</div>
+									<?php
+								}
+							?>
+					</div>
+					<div>
+						<?php 
+								if ($passwordReseted == true) {
+									?>
+									<div class="green">Your password has been succesfully changed, <a href="Login">Login</a></div>
+									<?php
+								}
+							?>
+					</div>
 					
 					<div class="filed">
-					<input type="password" ng-model="register.pwd" placeholder="Password" class="ipt pwd  " name="userPassword" id="regiterPassword" datatype="pwd" errormsg="Password must be at least 8 characters with uppercase letters and numbers." nullmsg="This field is required.">
-					<input type="text" name="password" ng-model="register.password" id="password" style="display:none;" >
+					<input type="password" name="resetPassword" placeholder="Password" class="ipt" id="resetPassword" datatype="pwd" required>
 					</div>
 		
 					<div class="filed">
-						<input type="password" ng-model="register.rePwd" placeholder="Confirm Password" class="ipt pwd  " datatype="*" errormsg="Passwords do not match.Please try again." recheck="userPassword" nullmsg="This field is required." id="regiterRepeatPassword">
+						<input type="password" name="confirmResetPassword" placeholder="Confirm Password" class="ipt" required>
 					</div>
-		
-					<input style="display: none" id="ts" type="text" ng-model="register.ts" name="ts" >
 					
 					<div class="filed">	
-						<input type="submit" value="Modify password" class="btn btn-blue btn-block" id="register-btn" ng-disabled="!register.email || !register.pwd || !register.rePwd || !register.agreement" ng-show="!loadingGeetest" disabled="disabled">
+						<input type="submit" value="Modify password" class="btn btn-blue btn-block" id="register-btn">
 					</div> 
 				</form>
 			</div>

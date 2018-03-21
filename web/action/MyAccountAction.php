@@ -5,7 +5,7 @@
 	class MyAccountAction extends CommonAction {
 
 		public function __construct() {
-			parent::__construct(parent::$VISIBILITY_PUBLIC, "My Neblex Account" , true);
+			parent::__construct(parent::$VISIBILITY_MEMBER, "My Neblex Account" , true);
 		}
 
 		protected function executeAction() {

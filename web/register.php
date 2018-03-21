@@ -4,11 +4,15 @@
 	$action = new RegisterAction();
 	$action->execute();
 
+	$wrongRegister = $action->wrongRegister;
+	$confirmationSent = $action->confirmationSent;
+	$samePassword = $action->samePassword;
+
 	require_once("partial/header.php");
 ?>
 		<div>
 			<div class="formBlock">
-				<form class="loginForm" id="register-form">
+				<form class="loginForm" method="post" action="register">
 					<a href="Index"><img src="./images/logo.png"  height="60" alt="NEBLEX"></a>
 					<h3 class="loginFormTitle"><span >Register</span></h3> 
 
@@ -17,25 +21,47 @@
 					</div>
 
 	 				<div class="ErrorForm"></div>
-		
+					 <?php 
+							if ($wrongRegister === true) {
+								?>
+								<div class="magenta"><strong>The email you chose is already being used</strong></div>
+								<?php
+							}
+					?>
+					<?php 
+							if ($samePassword === false) {
+								?>
+								<div class="magenta"><strong>Password and Confirmation don't match</strong></div>
+								<?php
+							}
+					?>
+					<?php 
+							if ($confirmationSent === true) {
+								?>
+								<div class="green"><strong>Confirmation mail sent, go check your email !</strong></div>
+								<?php
+							}
+					?>
+
 					<div class="filed">
-						<input id="email" type="email" placeholder="Email" class="ipt" name="email" errormsg="Invalid email address." nullmsg="This field is required.">
+						<input type="email" id="registerEmail" placeholder="Email" class="ipt" name="registerEmail" required>
 					</div>
 		
 					<div class="filed">
-						<input type="password" placeholder="Password" class="ipt" name="userPassword" id="regiterPassword" errormsg="Password must be at least 8 characters with uppercase letters and numbers." nullmsg="This field is required.">
+						<input type="password" id="regiterPassword" placeholder="Password" class="ipt" name="registerPassword" required>
 					</div>
 		
 					<div class="filed">
-						<input type="password" placeholder="Confirm Password" class="ipt" errormsg="Passwords do not match.Please try again." nullmsg="This field is required." id="regiterRepeatPassword">
+						<input type="password"  id="confirmationPassword" placeholder="Confirm Password" class="ipt"  name="confirmationPassword" required>
 					</div>
 
 					<div class="filed">
-						<label><input id="agreement" type="checkbox" datatype="checked" nullmsg="This field is required." >I agree to Neblex's <a href="#" target="_blank" class="blue ">Terms Of Use</a></label>
+					<!-- oninvalid="this.setCustomValidity('Before proceeding, read and accept our terms of use')" -->
+						<label><input id="agreement" name="agreement" type="checkbox" datatype="checked" required>I agree to Neblex's <a href="#" target="_blank" class="blue ">Terms Of Use</a></label>
 					</div>
 		
 					<div class="filed">	
-						<input type="submit" value="Register" class="btn btn-blue btn-block" id="register-btn" disabled="disabled">
+						<input type="submit" value="Register" class="btn btn-blue btn-block" id="register-btn">
 					</div> 
 		
 					<div>

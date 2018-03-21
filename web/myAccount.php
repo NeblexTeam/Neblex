@@ -29,9 +29,7 @@
 							</div>
 							<div class="panel-body">
 								<div class="item">
-								<!-- TODO ENTER GOOD EMAIL -->
 									<h4>admingod@neblex.io</h4>
-									<a href="./forgotPassword" class="btn btn-blue">Modify</a>
 								</div>
 							</div>
 						</div>

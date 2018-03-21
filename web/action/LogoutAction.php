@@ -8,7 +8,13 @@
 			parent::__construct(parent::$VISIBILITY_MEMBER, "Logout Neblex");
 		}
 
-		protected function executeAction() {
-
+		function executeAction() {
+			$_SESSION["visibility"] = 0;
+			
+			session_unset();
+			session_destroy();
+	
+			header("location:index");
+			exit;
 		}
-	}
+}
