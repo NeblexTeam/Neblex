@@ -3,6 +3,7 @@
 
 	$action = new MyAccountAction();
 	$action->execute();
+	$connection = $action->connection;
 
 	require_once("partial/header.php");
 ?>
@@ -29,7 +30,7 @@
 							</div>
 							<div class="panel-body">
 								<div class="item">
-									<h4>admingod@neblex.io</h4>
+									<h4><?= $_SESSION["email_user"] ?></h4>
 								</div>
 							</div>
 						</div>
@@ -73,11 +74,36 @@
 							<th>IP Address</th>
 							<th width="30%">Location</th>
 						</tr>
-						<tr>
-							<td>2018-03-14 18:16:18</td>
-							<td>127.0.0.1</td>
-							<td width="30%">djibouti africa</td>
-						</tr>
+					<?php
+						for ($row = count($connection)-1; $row >= 0; $row--) { 
+					?>
+							<tr>
+					<?php
+							for ($col=0; $col < 3; $col++) { 
+								if($col===0){
+									?><td><?=date("Y-m-d H:i:s", $connection[$row]["dateconnection"])." (EST)";?></td><?php
+								}
+								else if($col===1){
+									?><td><?=$connection[$row]["ipconnection"]?></td><?php
+								}
+								else if($col===2){
+									$ip = $connection[$row]["ipconnection"];
+									$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"), true);
+									?><td>
+									<?php 
+										if(isset($details["region"]) && isset($details["country"])){
+											echo $details["region"].", ".$details["country"];
+										} 
+									?></td><?php
+								}
+					?>
+					<?php
+							}
+					?>
+							</tr>
+					<?php
+						}
+					?>
 					</tbody>
 				</table>
 			</div>

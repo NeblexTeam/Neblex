@@ -4,6 +4,7 @@
 	class UserDAO {
 
 		public static function authenticate($username, $password) {
+			
 			$visibility = 0;
 			$connection = Connection::getConnection();
 			
@@ -18,7 +19,7 @@
 			if($info["tokenconfirmation"] === null)
 			{
 				if(password_verify($password, $info["password"])){			
-					$statement = $connection->prepare("SELECT ID FROM TABLE_USER WHERE email = ? AND password = ?");
+					$statement = $connection->prepare("SELECT * FROM TABLE_USER WHERE email = ? AND password = ?");
 					$statement->bindParam(1, $usernameLower);
 					$statement->bindParam(2, $info["password"]);
 					$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -28,6 +29,7 @@
 
 					if ($user) {
 						$_SESSION["id_user"] = $user["id"];
+						$_SESSION["email_user"] = $user["email"];
 						$visibility = 1;
 					}
 				}

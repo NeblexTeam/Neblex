@@ -17,6 +17,7 @@
 			$this->pageTitle = $pageTitle;
 			$this->pageCssFile = $pageCssFile;
 			$this->isMenu = $isMenu;
+
 		}
 
 		public function execute() {			
@@ -80,6 +81,25 @@
 			return $randomString;
 		}
 		
+		public function getIp(){
+			$ipaddress = '';
+			if (getenv('HTTP_CLIENT_IP'))
+				$ipaddress = getenv('HTTP_CLIENT_IP');
+			else if(getenv('HTTP_X_FORWARDED_FOR'))
+				$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+			else if(getenv('HTTP_X_FORWARDED'))
+				$ipaddress = getenv('HTTP_X_FORWARDED');
+			else if(getenv('HTTP_FORWARDED_FOR'))
+				$ipaddress = getenv('HTTP_FORWARDED_FOR');
+			else if(getenv('HTTP_FORWARDED'))
+			   $ipaddress = getenv('HTTP_FORWARDED');
+			else if(getenv('REMOTE_ADDR'))
+				$ipaddress = getenv('REMOTE_ADDR');
+			else
+				$ipaddress = 'UNKNOWN';
+			return $ipaddress;
+		}
+		
 		public function mailresetlink($to,$token){
 			$subject = "Request for password reset on Neblex";
 			$uri = 'http://localhost/Neblex/web';
@@ -129,7 +149,7 @@
 			';
 			$headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-			$headers .= 'From: NeblexTeam<support@neblex.io>' . "\r\n";
+			$headers .= 'From: NeblexTeam<support@localhost>' . "\r\n";
 			$headers .= 'Cc: support@localhost' . "\r\n";
 			mail($to,$subject,$message,$headers);
 	

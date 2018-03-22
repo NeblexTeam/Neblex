@@ -1,6 +1,7 @@
 <?php
 	require_once("action/CommonAction.php");
 	require_once("action/dao/UserDAO.php");
+	require_once("action/dao/LastConnectionDAO.php");
 
 	class LoginAction extends CommonAction {
 		public $wrongLogin = false;
@@ -26,6 +27,11 @@
 				$visibility = UserDAO::authenticate($_POST["loginEmail"], $_POST["loginPassword"]);
 
 				if ($visibility === 1) {
+					LastConnectionDAO::connectionSuccess(	
+															time(), 
+															CommonAction::getIp(),
+															$_SESSION["id_user"]
+														);
 					$_SESSION["visibility"] = $visibility;
 						
 					header("location:index");
