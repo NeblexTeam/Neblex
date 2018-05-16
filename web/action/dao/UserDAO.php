@@ -61,6 +61,16 @@
 				$statement->bindParam(2, $password);
 				$statement->execute();
 				$_SESSION["creationSuccess"] = true;
+
+				$statementID = $connection->prepare("SELECT id FROM TABLE_USER WHERE email = ?");
+				$statementID->bindParam(1, $emailLower);
+				$statementID->setFetchMode(PDO::FETCH_ASSOC);
+				$statementID->execute();
+
+				$userid = $statementID->fetch();
+
+				return $userid;
+
 			}
 			catch(Exception $e){
 				$_SESSION["creationSuccess"] = false;

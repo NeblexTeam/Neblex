@@ -3,7 +3,9 @@
 
 	$action = new IndexAction();
 	$action->execute();
-	$coin = $action->coin;
+	$getCoin = $action->getCoin;
+	//$coinArray = $action->coinArray;
+	//$tickerArray = $action->tickerArray;
 
 	require_once("partial/header.php");
 ?>
@@ -44,19 +46,25 @@
 								</tr>
 								<!-- COIN ROW -->
 								<?php
-								for ($row = count($coin)-1; $row >= 0; $row--) { 
+								for ($row = count($getCoin)-1; $row >= 0; $row--) { 
 								?>
 										<tr>
 								<?php
 										for ($col=0; $col < 5; $col++) { 
 											if($col===0){
-												?><td class="alignleft"><?=$coin[$row]["name"]."/".$coin[$row]["ticker"]?></td><?php
+												?><td class="alignleft"><div id="divTokenName"><?=$getCoin[$row]["name"]."/".$getCoin[$row]["ticker"]?></div></td><?php
 											}
 											else if($col===1){
-												?><td class="alignleft">test</td><?php
+												?><td class="alignleft">0.00000000</td><?php
+											}
+											else if($col===2){
+												?><td class="alignright">0%</td><?php
+											}
+											else if($col===3){
+												?><td class="alignright">0.00000000</td><?php
 											}
 											else{
-												?><td class="alignright">test</td><?php
+												?><td class="alignright">0.00000000</td><?php
 											}
 								?>
 								<?php

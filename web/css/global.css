@@ -50,6 +50,7 @@ body{
 	width:1200px;
 	margin:0 auto;
 }
+
 .top .container{
 	background:#262d33;
 	padding:0px 15px;
@@ -155,6 +156,48 @@ input:focus{
 .btn-blue:active{
 	background:#12a5b4;
 	border-color:#12a5b4;
+}
+
+.btn-red{
+	background:#F32222;
+	border-color:#FF3030;
+	color:#fff;
+}
+.btn-red:hover{
+	background:#FD4A4A;
+	border-color:#FE4141;
+}
+.btn-red:active{
+	background:#B41010;
+	border-color:#B41010;
+}
+
+.btn-green{
+	background:#4DD31C;
+	border-color:#1ACB58;
+	color:#fff;
+}
+.btn-green:hover{
+	background:#18991B;
+	border-color:#119314;
+}
+.btn-green:active{
+	background:#16630E;
+	border-color:#268311;
+}
+
+.btn-gray{
+	background:#828282;
+	border-color:#717171;
+	color:#fff;
+}
+.btn-gray:hover{
+	background:#545454;
+	border-color:#393939;
+}
+.btn-gray:active{
+	background:#323232;
+	border-color:#242424;
 }
 
 /* LOGIN FORM */
@@ -307,7 +350,28 @@ table{
 }
 .table td{color:#666;}
 
+/* EXCHANGE FORM */
+.spaced{margin-bottom:5px;}
+.input-wrapper:after {
+    content:"click to edit";
+}
+.buybox{
+	width:350px;
+	position:absolute;
+	bottom:32px;
+	left:10px;
+	padding:5px;
+	border:2px solid black;
+}
 
+.sellbox{
+	width:350px;
+	position:absolute;
+	bottom:32px;
+	left:375px;
+	padding:5px;
+	border:2px solid black;
+}
 
 
 
@@ -353,6 +417,46 @@ table{
     background-color: #007DFF;
 }
 
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
 
 /* FOOTER */
 
@@ -387,4 +491,207 @@ table{
 }
 .panel .panel-body{padding:30px 15px;}
 
+/* API PRELOADER LOADER */
+#loader-wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width : 100%;
+	height:100%;
+	z-index:1000;
+}
 
+#loader {
+	display:block;
+	position: relative;
+	left:50%;
+	top:50%;
+	width:150px;
+	height:150px;
+	margin:-75px 0 0 -75px;
+	border-radius: 50%;
+	border:6px solid transparent;
+	border-top-color: #7FB3FF;
+
+	-webkit-animation: spin 2s linear infinite;  /* Chrome, Opera 15+, Safari 5+ */
+			animation:spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+	z-index:1001;
+}
+
+#loader:before{
+	content:"";
+	position:absolute;
+	top:5px;
+	left:5px;
+	right:5px;
+	bottom:5px;
+	border-radius: 50%;
+	border:5px solid transparent;
+	border-top-color: #3498DB;
+
+	-webkit-animation: spin 3s linear infinite;  /* Chrome, Opera 15+, Safari 5+ */
+			animation:spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:after{
+	content:"";
+	position:absolute;
+	top:15px;
+	left:15px;
+	right:15px;
+	bottom:15px;
+	border-radius: 50%;
+	border:4px solid transparent;
+	border-top-color: #112BE3;
+
+	-webkit-animation: spin 1.5s linear infinite;  /* Chrome, Opera 15+, Safari 5+ */
+			animation:spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+@-webkit-keyframes spin{
+	0% 	 { 
+		-webkit-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		transform: rotate(0deg);
+	 }
+	100% { 
+		-webkit-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes spin{
+	0% 	 { 
+		-webkit-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		transform: rotate(0deg);
+	 }
+	100% { 
+		-webkit-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+#loader-wrapper .loader-section{
+	position:fixed;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#DCDADA;
+	z-index: 1000;
+}
+
+#loader-wrapper .loader-section.section-top{
+	top:0;
+}
+
+/* Loaded styles */
+.loaded #loader-wrapper .loader-section.section-top{
+	-webkit-transform: translateY(100%);
+		-ms-transform: translateY(100%);
+			transform: translateY(100%);
+	
+	-webkit-transition: all 0.6s 0.3s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+			transition: all 0.6s 0.3s  ease-out;  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+}
+
+.loaded #loader {
+	opacity:0;
+
+	-webkit-transition: all 0.3s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+			transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+}
+.loaded #loader-wrapper{
+	visibility: hidden;
+
+	-webkit-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+			transform: translateY(200%);
+	
+	-webkit-transition: all 0.3s 0.9s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+			transition: all 0.3s 0.9s ease-out;  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+}
+
+
+/* BALANCE POPUP */
+.containerBox{
+	width: 50%;
+	margin:auto;
+}
+/* Full-width input fields */
+.inputNumber{
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+	font-size:16px;
+}
+
+/* Set a style for all buttons */
+.boxButton {
+    background-color: #2893E0;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 26px;
+    border: none;
+    cursor: pointer;
+    width: 90%;
+	font-size:20px;
+}
+.boxButton:hover {
+    opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+/* The Modal (background) */
+.modal {
+	display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 4% auto 15% auto;
+    border: 1px solid #888;
+    width: 40%; 
+	padding-bottom: 30px;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+.close:hover,.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    animation: zoom 0.6s
+}
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}

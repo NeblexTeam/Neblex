@@ -3,6 +3,7 @@
 
 	$action = new OrderHistoryAction();
 	$action->execute();
+	$getOrderHistory = $action->getOrderHistory;
 
 	require_once("partial/header.php");
 ?>
@@ -64,32 +65,67 @@
 							</th>		
 						</tr>
 						<!-- COIN ROW -->
-						<tr>
-							<td class="alignleft  ">
-								test
-							</td>
-							<td class="alignleft ">
-								test
-							</td>
-							<td class="alignright">
-								test
-							</td>
-							<td class="alignright ">
-								test
-							</td>
-							<td class="alignright ">
-								test
-							</td>
-							<td class="alignright ">
-								test
-							</td>
-							<td class="alignright ">
-								Test								
-							</td>
-							<td class="alignright ">
-								test	
-							</td>								
-						</tr>
+						<?php
+						for ($row = 0; $row <=  count($getOrderHistory)-1; $row++) { 
+						?>
+							<tr>
+								<td class="alignleft  ">
+									<?=date("Y-m-d H:i:s", $getOrderHistory[$row]["ordertime"])." (EST)";?>
+								</td>
+								<?php
+								if($getOrderHistory[$row]["transactiontype"] === "b") { 
+								?>
+									<td class="alignleft ">
+										<?=$getOrderHistory[$row]["pair"]?>/NEBL
+									</td>
+									<td class="alignright">
+										<span class="green">BUY</span>
+									</td>
+								<?php
+								}
+								else
+								{ 
+								?>
+									<td class="alignleft ">
+										NEBL/<?=$getOrderHistory[$row]["pair"]?>
+									</td>
+									<td class="alignright">
+										<span class="magenta">SELL</span>
+									</td>
+								<?php
+								}
+								?>	
+								<td class="alignright ">
+									<?=number_format($getOrderHistory[$row]["price"], 8)?>
+								</td>
+								<td class="alignright ">
+									<?=number_format($getOrderHistory[$row]["amount"], 8)?>
+								</td>
+								<td class="alignright ">
+									0.00%
+								</td>
+								<td class="alignright ">
+									<?=number_format($getOrderHistory[$row]["price"] * $getOrderHistory[$row]["amount"], 8)?>							
+								</td>
+								<td class="alignright ">
+								<?php
+								if($getOrderHistory[$row]["status"]	=== "Canceled") { 
+								?>
+									<span style="color:#bebebe;"><?=$getOrderHistory[$row]["status"]?></span>
+								<?php
+								}
+								else
+								{ 
+								?>
+									<?=$getOrderHistory[$row]["status"]?>
+								<?php
+								}
+								?>						
+								</td>						
+							</tr>
+						<?php
+						}
+						?>
 					</tbody>
 				</table>
 			</div>	

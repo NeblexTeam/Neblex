@@ -10,13 +10,15 @@
 		private $pageVisibility;
 		private $pageTitle;
 		private $pageCssFile;
+		private $pageJsFile;
 		private $isMenu;
 
-		public function __construct($pageVisibility, $pageTitle,  $isMenu = false, $pageCssFile = null) {
+		public function __construct($pageVisibility, $pageTitle, $isMenu = false, $pageJsFile = null, $pageCssFile = null) {
 			$this->pageVisibility = $pageVisibility;
 			$this->pageTitle = $pageTitle;
 			$this->pageCssFile = $pageCssFile;
 			$this->isMenu = $isMenu;
+			$this->pageJsFile = $pageJsFile;
 
 		}
 
@@ -58,6 +60,12 @@
 		public function getPageCssFile() {
 			if( isset($this->pageCssFile) && strpos($this->pageCssFile, "stylesheet")) {
 				echo $this->pageCssFile;
+			}
+		}
+
+		public function getPageJsFile() {
+			if( isset($this->pageJsFile)) {
+				echo $this->pageJsFile;
 			}
 		}
 
@@ -154,6 +162,15 @@
 			mail($to,$subject,$message,$headers);
 	
 		}
+
+		public function loading() {
+			?>
+			<!--API LOADER -->
+			<div id="loader-wrapper">
+					<div id="loader"></div>
+					<div class="loader-section section-top"></div>
+			</div>
+			<?php
+		}
+		
 	}
-
-

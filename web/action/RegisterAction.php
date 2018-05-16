@@ -1,11 +1,13 @@
 <?php
 	require_once("action/CommonAction.php");
 	require_once("action/dao/UserDAO.php");
+	require_once("action/dao/BalanceDAO.php");
 
 	class RegisterAction extends CommonAction {
 		public $wrongRegister = false;
 		public $confirmationSent = false;
 		public $samePassword = true;
+		public $userid;
 
 		public function __construct() {
 			parent::__construct(parent::$VISIBILITY_PUBLIC, "Register");
@@ -20,9 +22,10 @@
 						$token = CommonAction::generateRandomString();
 						$passwordHash = password_hash(($_POST["registerPassword"]), PASSWORD_BCRYPT);
 
-						UserDAO::createAccount($_POST["registerEmail"]
-											, $passwordHash);
+						$userid = UserDAO::createAccount($_POST["registerEmail"]
+														, $passwordHash);
 						if($_SESSION["creationSuccess"] === true){
+							BalanceDAO::generateBalance($userid);
 							UserDAO::giveToken($token, $_POST["registerEmail"], true);
 							CommonAction::mailconfirmation($_POST["registerEmail"], $token);	
 							$this->confirmationSent = true;

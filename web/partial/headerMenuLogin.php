@@ -5,11 +5,7 @@
 	<li class="right"><a href="Logout" class="link">Logout</a></li>
 	<li class="right"><a href="MyAccount" class="link">MyAccount</a></li>	
 	<li class="right"><a href="Balance" class="link">Balance</a></li>
-	<li class="right link">Order
-		<ul>
-			<li><a href="OpenOrders" class="link">Open Orders</a></li>
-			<li><a href="OrderHistory" class="link">Order History</a></li>
-		</ul>
-	</li>
+	<li class="right"><a href="OpenOrders" class="link">Open Orders</a></li>
+	<li class="right"><a href="OrderHistory" class="link">Order History</a></li>
 </ul>
 </nav>
