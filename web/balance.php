@@ -28,7 +28,7 @@
 			<div>
 			<!-- search bar -->		
 				<div class="floatleft">
-					<input type="text" id="searchBalance" onkeyup="filterTable('searchBalance','tableBalance', 0)">
+					<input type="text" id="searchBalance" placeholder="Coin" onkeyup="filterTable('searchBalance','tableBalance', 0)">
 				</div>
 				<div class="floatleft">
 					<!-- <input type="checkbox">

@@ -1,5 +1,6 @@
 <?php
-	require_once('../neblio-api-lib-php/vendor/autoload.php');
+/*UNCOMMENT TO USE NEBLIO API*/
+	//require_once('../neblio-api-lib-php/vendor/autoload.php');
 
 	class ConnectionAPI {
 		

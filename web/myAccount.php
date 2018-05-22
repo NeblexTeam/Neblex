@@ -37,7 +37,7 @@
 					</div>	
 				</div>
 
-				<div class="f-cb">
+				<!-- <div class="f-cb">
 					<div class="panel">
 						<div class="panel-title">
 							My NEBLIO Wallet
@@ -61,7 +61,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div>Last login</div>
 				<table class="table">

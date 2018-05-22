@@ -22,7 +22,7 @@
 							</ul>
 					<!-- search bar -->		
 							<div class="floatleft">
-								<input type="text" id="inputMarket" onkeyup="filterTable('inputMarket','tableIndex', 0)">
+								<input type="text" id="inputMarket" placeholder="Pair" onkeyup="filterTable('inputMarket','tableIndex', 0)">
 							</div>
 					</div>
 				
