@@ -88,10 +88,11 @@
 
 		}	
 
-		public static function findEmail($email){	
+		public static function findEmail($email){
+			$usernameLower = strtolower($email);	
 			$connection = Connection::getConnection();		
 			$statement = $connection->prepare("SELECT id FROM TABLE_USER WHERE email = ?");
-			$statement->bindParam(1, $email);
+			$statement->bindParam(1, $usernameLower);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

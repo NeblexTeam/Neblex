@@ -5,6 +5,7 @@
 	$action->execute();
 	$wrongLogin = $action->wrongLogin;
 	$emailConfirm = $action->emailConfirm;
+	$tooManyConnections = $action->tooManyConnections;
 
 	require_once("partial/header.php");
 ?>
@@ -24,6 +25,11 @@
 						if ($wrongLogin === true) {
 							?>
 							<div class="magenta">Wrong email or password, try again !</div>
+							<?php
+						}
+						if ($tooManyConnections === true) {
+							?>
+							<div class="magenta">Too many failed connection attempt, wait 2 minutes and try again !</div>
 							<?php
 						}
 						if ($emailConfirm === false) {
