@@ -373,6 +373,59 @@ table{
 	border:2px solid black;
 }
 
+.orderBook{
+	width:350px;
+	position:absolute;
+	top:75px;
+	right:5px;
+	background:#717171;
+	border:2px solid black;
+}
+
+.orderBook p{
+	color:#FFF;
+	font-size:13px;
+	padding-right:15px;
+	padding-left:15px;
+}
+
+.titleOrderBook{
+	width:348px;
+	height:20px;
+	position:relative;
+}
+
+.buyOrder{
+	width:348px;
+	height:20px;
+	position:relative;
+	background:#C4FFB7;
+	border:1px solid #829F85;
+}
+
+.buyOrder p{
+	color:#013905;
+	font-size:13px;
+	padding-right:15px;
+	padding-left:15px;
+	padding-top:2px;
+}
+
+.sellOrder{
+	width:348px;
+	height:20px;
+	position:relative;
+	background:#FFADAD;
+	border:1px solid #9F8282;
+}
+
+.sellOrder p{
+	color:#390101;
+	font-size:13px;
+	padding-right:15px;
+	padding-left:15px;
+	padding-top:2px;
+}
 
 
 /* NAV BAR */

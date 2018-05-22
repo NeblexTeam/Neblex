@@ -7,6 +7,8 @@
 	$getBalance = $action->getBalance;
 	$totalNebl = $action->totalNebl;
 	$price = $action->price;
+	$getLastPrice = $action->getLastPrice;
+	$getInOrder = $action->getInOrder;
 
 	require_once("partial/header.php");
 ?>
@@ -26,18 +28,18 @@
 			<div>
 			<!-- search bar -->		
 				<div class="floatleft">
-					<input type="text">
+					<input type="text" id="searchBalance" onkeyup="filterTable('searchBalance','tableBalance', 0)">
 				</div>
 				<div class="floatleft">
-					<input type="checkbox">
+					<!-- <input type="checkbox">
 					<label for="" >
 						Hide small assets
-					</label>
+					</label> -->
 				</div>
 			</div>
 			
 			<div class=>
-				<table class="table">
+				<table class="table" id="tableBalance">
 					<tbody>
 						<!-- TITLE ROW -->
 						<tr>
@@ -76,19 +78,49 @@
 									<td class="alignleft ">
 										<?=$getCoin[$row]["name"]?>
 									</td>
-									<td class="alignright">
-										<?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?>
-									</td>
-									<td class="alignright">
-										test
-									</td>
-									<td class="alignright">
-										test
-									</td>
-									<td class="alignright">
-										<!-- PUT LAST BUYED PRICE INSTEAD OF THE "0.1"-->
-										<?php echo number_format(floatval($getBalance[$getCoin[$row]["id"]-1]["balance"])*0.1, 8) ?>
-									</td>
+									<?php
+									if($getCoin[$row]["ticker"] === "NEBL"){
+									?>
+										<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"] + $getInOrder["NEBL"], 8)?></td>
+										<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+										<td class="alignright"><?= number_format($getInOrder["NEBL"], 8)?></td>
+										<td class="alignright"><?=number_format(floatval($getBalance[$getCoin[$row]["id"]-1]["balance"]) + $getInOrder["NEBL"], 8)?></td>
+									<?php
+									}
+									else{
+										if(!empty($getInOrder)){
+											if(array_key_exists($getCoin[$row]["ticker"],$getInOrder)){	
+									?>
+											<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"] + $getInOrder[$getCoin[$row]["ticker"]], 8)?></td>
+											<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+											<td class="alignright"><?= number_format($getInOrder[$getCoin[$row]["ticker"]], 8)?></td>
+									<?php
+											}
+											else{
+												?>
+												<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+												<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+												<td class="alignright"><?= number_format(0, 8)?></td>
+										<?php
+											}
+										}
+										else{
+										?>
+											<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+											<td class="alignright"><?= number_format($getBalance[$getCoin[$row]["id"]-1]["balance"], 8)?></td>
+											<td class="alignright"><?= number_format(0, 8)?></td>
+										<?php		
+										}				
+										if(empty($getLastPrice[$getCoin[$row]["ticker"]])){
+										?>			
+											<td class="alignright">Undefined</td>
+										<?php
+										}
+										else{
+											?><td class="alignright"><?=number_format(floatval(($getBalance[$getCoin[$row]["id"]-1]["balance"])+ $getInOrder[$getCoin[$row]["ticker"]])*$getLastPrice[$getCoin[$row]["ticker"]][0]["price"], 8) ?></td><?php
+										}
+									}
+									?>
 									<td class="alignright">
 									<button type="button" class="btn btn-blue" onclick="document.getElementById('modal-wrapper-deposit-<?=$row?>').style.display='block'; document.getElementById('input-Deposit-<?=$getCoin[$row]["id"]?>').disabled = false;">Deposit</button>
 										<div id="modal-wrapper-deposit-<?=$row?>" class="modal">

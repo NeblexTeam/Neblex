@@ -15,7 +15,7 @@
 				$this->validEmail = UserDAO::findEmail($_POST["resetEmail"]);
 
 				if($this->validEmail > -1){
-					UserDAO::giveToken(CommonAction::generateRandomString(), $email, false);
+					UserDAO::giveToken(CommonAction::generateRandomString(), $_POST["resetEmail"], false);
 					CommonAction::mailresetlink($_POST["resetEmail"], UserDAO::getToken($_POST["resetEmail"]));			
 				}
 			}					

@@ -13,36 +13,37 @@
 			</div>
 			
 			<div class=>
-				<table class ="table" id="product">
+				<table class ="table" id="tableOrder">
 					<tbody>
 						<!-- TITLE ROW -->
 						<tr>
-							<th class="alignleft  ">
+							<th class="alignleft">
 								Date
 							</th>
-							<th class="alignleft  ">
+							<th class="alignleft">
 								Pair
 							</th>
-							<th class="alignright ">
+							<th class="alignright">
 								Type
 							</th>
-							<th class="alignright ">
+							<th class="alignright">
 								Price
 							</th>
-							<th class="alignright ">
+							<th class="alignright">
 								Amount
 							</th>
-							<th class="alignright ">
+							<th class="alignright">
 								Filled
 							</th>
-							<th class="alignright ">	
+							<th class="alignright">	
 								Total								
 							</th>
-							<th class="alignright ">
+							<th class="alignright">
 								Action									
 							</th>		
 						</tr>
 						<!-- COIN ROW -->
+						<form name="cancelOrder" method="post" action="openOrders">
 						<?php
 						for ($row = 0; $row <=  count($getOpenOrders)-1; $row++) { 
 						?>
@@ -80,18 +81,19 @@
 									<?=number_format($getOpenOrders[$row]["amount"], 8)?>
 								</td>
 								<td class="alignright ">
-									0.00%
+									<?=number_format($getOpenOrders[$row]["amount"] / $getOpenOrders[$row]["originalamount"] * 100, 2)?>%
 								</td>
 								<td class="alignright ">
 									<?=number_format($getOpenOrders[$row]["price"] * $getOpenOrders[$row]["amount"], 8)?>							
 								</td>
 								<td class="alignright ">
-									<a href="#" class="btn ">Cancel</a>	
+									<button type="submit" id="cancelOrder-<?=$row?>" name="cancelOrder-<?=$row?>" value="Cancel-<?=$row?>" class="btn">Cancel</button>
 								</td>								
 							</tr>
 						<?php
 						}
 						?>
+						</form>
 					</tbody>
 				</table>
 			</div>	

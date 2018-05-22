@@ -16,7 +16,6 @@
 				$statement->execute();
 
 				$connectionAmount = $statement->fetchall();
-				print_r(count($connectionAmount));
 
 			}
 			catch(Exception $e){
@@ -56,7 +55,6 @@
 				$statement->execute();
 			}
 			catch(Exception $e){
-				print_r($userId);
 			}
 		}
 		

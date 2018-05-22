@@ -9,6 +9,8 @@
 	$getNeblBalance = $action->getNeblBalance;
 	$isTokenReal;
 
+	$getOrderFromPairBuy = $action->getOrderFromPairBuy;
+	$getOrderFromPairSell = $action->getOrderFromPairSell;
 
 	require_once("partial/header.php");
 ?>
@@ -20,7 +22,6 @@
 			if(isset($_GET['token'])){
 				for ($row = 0; $row <=  count($tickerArray)-1; $row++) { 
 					if($tickerArray[$row] !== "NEBL"){
-						print_r($tickerArray[4]);
 						if($_GET['token'] === $tickerArray[$row]){
 							$isTokenReal=true;
 				?>
@@ -105,7 +106,38 @@
 		<?php
 		}
 		?>
+		<div class="orderBook">
+			<div class="titleOrderBook"> 
+				<p class="floatleft">Price (NEBL)</p>
+				<p class="floatleft">Amount (<?=$_GET['token']?>)</p>
+				<p class="floatright">Total (NEBL)</p>
+			</div>
+			<?php
+			for($i=0; $i<=count($getOrderFromPairBuy)-1; $i++){
+			?>
+				<div class="buyOrder"> 
+					<p class="floatleft"><?= number_format($getOrderFromPairBuy[$i]["price"],8) ?></p>
+					<p class="floatleft"><?= number_format($getOrderFromPairBuy[$i]["amount"],8) ?></p>
+					<p class="floatright"><?= number_format($getOrderFromPairBuy[$i]["amount"] * $getOrderFromPairBuy[$i]["price"],8) ?></p>
+				</div>
+			<?php
+			}
+			?>
+			
+			<?php
+			for($i=0; $i<=count($getOrderFromPairSell)-1; $i++){
+			?>
+				<div class="sellOrder"> 
+					<p class="floatleft"><?= number_format($getOrderFromPairSell[$i]["price"],8) ?></p>
+					<p class="floatleft"><?= number_format($getOrderFromPairSell[$i]["amount"],8) ?></p>
+					<p class="floatright"><?= number_format($getOrderFromPairSell[$i]["amount"] * $getOrderFromPairSell[$i]["price"],8) ?></p>
+				</div>
+			<?php
+			}
+			?>
+		</div>
 	</div>
+
 		
 <?php
 	require_once("partial/footer.php");

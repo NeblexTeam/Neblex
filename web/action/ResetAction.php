@@ -13,7 +13,6 @@
 		}
 
 		protected function executeAction() {
-			print_r($this->token);
 			if(isset($_GET['token'])){
 				$this->token=$_GET['token'];
 			}
